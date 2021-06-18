@@ -6,21 +6,6 @@ const Calculator = () => {
   const [number2, setNumber2] = useState(0);
   const [result, setResult] = useState(0);
 
-  // const handleFn = (type) => {
-  //   switch (type) {
-  //     case "ADD":
-  //       setResult(number1 + number2);
-  //     case "SUBTRACT":
-  //       setResult(number1 - number2);
-  //     case "MULTIPLY":
-  //       setResult(number1 * number2);
-  //     case "DIVIDE":
-  //       setResult(number1 / number2);
-  //     default:
-  //       return;
-  //   }
-  // };
-
   const handleAdd = () => {
     setResult(number1 + number2);
   };
