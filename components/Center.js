@@ -1,11 +1,20 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
+import { Button, useTheme } from "react-native-elements";
+import useAuth from "../hooks/useAuth";
 
 // Obj.
 // To center provided children in the
 // center of the screen...
 const Center = ({ style, children }) => {
-  return <View style={[styles.container, style]}>{children}</View>;
+  const { theme } = useTheme();
+  return (
+    <View
+      style={[styles.container, { backgroundColor: theme.colors.white }, style]}
+    >
+      {children}
+    </View>
+  );
 };
 
 export default Center;

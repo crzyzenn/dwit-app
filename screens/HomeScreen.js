@@ -1,30 +1,21 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Button, Text } from "react-native";
 import Center from "../components/Center";
 import useAuth from "../hooks/useAuth";
+import { $axios } from "../lib/axios";
 
 const HomeScreen = ({ navigation, route }) => {
   const { user } = useAuth();
-  // Fetch data from api....axios...
-  const [data, setData] = useState(null);
 
-  const fetchData = async () => {
-    const { data } = await axios.get("https://reqres.in/api/users/2");
-    setData(data.data);
+  const fetchProducts = async () => {
+    const products = await $axios.get("/products");
+    console.log(products);
   };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
 
   return (
     <Center>
       <Text>Welcome {user.name}</Text>
-      <Text>{data && `Welcome ${data.first_name} ${data.last_name}`}</Text>
-      <Text>
-        Welcome {data?.first_name} {data?.last_name}
-      </Text>
+      <Button title="Fetch Products" onPress={fetchProducts} />
       <Button
         title="Go to Search Screen"
         onPress={() => navigation.navigate("Search")}

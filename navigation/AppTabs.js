@@ -3,6 +3,8 @@ import { View, Text } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Feather } from "@expo/vector-icons";
 import AppStack from "./AppStack";
+import SettingsScreen from "../screens/SettingsScreen";
+import { colors, useTheme } from "react-native-elements";
 
 const Tab = createBottomTabNavigator();
 
@@ -14,15 +16,8 @@ function HomeScreen() {
   );
 }
 
-function SettingsScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Settings!</Text>
-    </View>
-  );
-}
-
 const AppTabs = () => {
+  const { theme } = useTheme();
   return (
     <Tab.Navigator
       screenOptions={({ route }) => {
@@ -45,11 +40,15 @@ const AppTabs = () => {
               <Feather name={iconName} size={size} color={color} />
             );
           },
+          tabBarVisible: true,
         };
       }}
       tabBarOptions={{
-        activeTintColor: "teal",
-        inactiveTintColor: "#aaa",
+        activeTintColor: theme.colors.black,
+        inactiveTintColor: "gray",
+        style: {
+          backgroundColor: theme.colors.white,
+        },
       }}
     >
       <Tab.Screen name="Home" component={AppStack} />

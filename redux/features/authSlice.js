@@ -5,6 +5,7 @@ const { actions, reducer } = createSlice({
   initialState: {
     loggedIn: false,
     user: null,
+    dark: false,
   },
   reducers: {
     setAuth: (state, action) => {
@@ -12,9 +13,12 @@ const { actions, reducer } = createSlice({
       state.loggedIn = loggedIn;
       state.user = user;
     },
+    toggleDark: (state) => {
+      state.dark = !state.dark;
+    },
   },
 });
 
-export const { setAuth } = actions;
+export const { setAuth, toggleDark } = actions;
 
 export default reducer;
