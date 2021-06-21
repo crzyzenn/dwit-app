@@ -1,15 +1,9 @@
-import { Input, Button, Text } from "react-native-elements";
-import { Field, Form, Formik } from "formik";
+import { Formik } from "formik";
 import React from "react";
-import { TextInput } from "react-native";
-import Center from "../components/Center";
+import { Button, Input, Text } from "react-native-elements";
 import * as yup from "yup";
-import { $axios } from "../lib/axios";
-
-// Inputfield -> custom ..
-// button -> custom..
-
-// Setup...axios
+import Center from "../components/Center";
+import useAuth from "../hooks/useAuth";
 
 const validationSchema = yup.object({
   email: yup.string().email().required(),
@@ -17,14 +11,7 @@ const validationSchema = yup.object({
 });
 
 const LoginScreen = ({ navigation }) => {
-  const handleLogin = async (values) => {
-    try {
-      const data = await $axios.post("/ph-auth/products", values);
-      console.log(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const { login } = useAuth();
 
   return (
     <Center
@@ -45,7 +32,7 @@ const LoginScreen = ({ navigation }) => {
           email: "",
           password: "",
         }}
-        onSubmit={handleLogin}
+        onSubmit={login}
         validationSchema={validationSchema}
       >
         {({

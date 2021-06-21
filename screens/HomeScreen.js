@@ -1,10 +1,11 @@
 import axios from "axios";
-import React, { useState } from "react";
-import { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Text } from "react-native";
 import Center from "../components/Center";
+import useAuth from "../hooks/useAuth";
 
 const HomeScreen = ({ navigation, route }) => {
+  const { user } = useAuth();
   // Fetch data from api....axios...
   const [data, setData] = useState(null);
 
@@ -19,6 +20,7 @@ const HomeScreen = ({ navigation, route }) => {
 
   return (
     <Center>
+      <Text>Welcome {user.name}</Text>
       <Text>{data && `Welcome ${data.first_name} ${data.last_name}`}</Text>
       <Text>
         Welcome {data?.first_name} {data?.last_name}

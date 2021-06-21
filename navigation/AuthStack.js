@@ -1,7 +1,6 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 import InputBasics from "../components/classes/InputBasics";
-import LayoutBasics from "../components/classes/LayoutBasics";
 import LoginScreen from "../screens/LoginScreen";
 
 const Stack = createStackNavigator();
