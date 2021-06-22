@@ -2,14 +2,10 @@ import React from "react";
 import { Button, StyleSheet, Text, View } from "react-native";
 import Center from "../components/Center";
 
-const SearchScreen = ({ navigation }) => {
+const ProductDetailsScreen = ({ navigation }) => {
   return (
     <Center style={styles.searchContainer}>
-      <Text>Search anything you want!!</Text>
-      <Button
-        title="Go to Settings Screen"
-        onPress={() => navigation.navigate("Settings")}
-      />
+      <Text>Product description....</Text>
     </Center>
   );
 };
@@ -20,4 +16,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SearchScreen;
+export default ProductDetailsScreen;

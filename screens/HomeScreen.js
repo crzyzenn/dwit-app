@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { ScrollView } from "react-native";
 import { StatusBar } from "react-native";
 import { Text } from "react-native";
 import { Button } from "react-native-elements";
@@ -25,13 +26,41 @@ const HomeScreen = ({ navigation }) => {
   return (
     <Center>
       <StatusBar barStyle="dark-content" />
-      {/* <Text>Welcome {user.name}</Text>
-      <Button title="Fetch categories" onPress={fetchData} />
-      <Text>No of categories {data?.length}</Text> */}
-      <ProductCard />
+      <ScrollView>
+        <ProductCard
+          image="https://www.pixsy.com/wp-content/uploads/2021/04/ben-sweet-2LowviVHZ-E-unsplash-1.jpeg"
+          title="Test Product"
+          category="Headphones"
+          price={199}
+        />
+        <ProductCard
+          image="https://hatrabbits.com/wp-content/uploads/2017/01/random.jpg"
+          title="Elephant Art Poster"
+          category="Art"
+          price={299}
+        />
+        <ProductCard
+          image="https://hatrabbits.com/wp-content/uploads/2017/01/random.jpg"
+          title="Elephant Art Poster"
+          category="Art"
+          price={299}
+        />
+        <ProductCard
+          image="https://hatrabbits.com/wp-content/uploads/2017/01/random.jpg"
+          title="Elephant Art Poster"
+          category="Art"
+          price={299}
+        />
+        <ProductCard
+          image="https://hatrabbits.com/wp-content/uploads/2017/01/random.jpg"
+          title="Elephant Art Poster"
+          category="Art"
+          price={299}
+        />
+      </ScrollView>
       <Button
-        title="Go to Search Screen"
-        onPress={() => navigation.navigate("Search")}
+        title="Go to Product Details Screen"
+        onPress={() => navigation.navigate("ProductDetails")}
       />
     </Center>
   );
