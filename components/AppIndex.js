@@ -1,6 +1,5 @@
 import { NavigationContainer } from "@react-navigation/native";
 import React from "react";
-import { useSelector } from "react-redux";
 import useAuth from "../hooks/useAuth";
 import AppTabs from "../navigation/AppTabs";
 import AuthStack from "../navigation/AuthStack";

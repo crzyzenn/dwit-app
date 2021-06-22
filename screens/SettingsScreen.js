@@ -1,19 +1,17 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Text } from "react-native";
+import { Button } from "react-native-elements";
 import Center from "../components/Center";
+import useAuth from "../hooks/useAuth";
 
 const SettingsScreen = () => {
+  const { logout, loading } = useAuth();
   return (
-    <Center style={styles.searchContainer}>
+    <Center>
       <Text>Go through your settings</Text>
+      <Button title="Logout" loading={loading} onPress={logout} />
     </Center>
   );
 };
-
-const styles = StyleSheet.create({
-  searchContainer: {
-    backgroundColor: "orange",
-  },
-});
 
 export default SettingsScreen;

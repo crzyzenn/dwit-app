@@ -1,30 +1,34 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Button, Text } from "react-native";
+import { StatusBar } from "react-native";
+import { Text } from "react-native";
+import { Button } from "react-native-elements";
 import Center from "../components/Center";
+import ProductCard from "../components/ProductCard";
 import useAuth from "../hooks/useAuth";
+import { $axios } from "../lib/axios";
 
-const HomeScreen = ({ navigation, route }) => {
+const HomeScreen = ({ navigation }) => {
   const { user } = useAuth();
   // Fetch data from api....axios...
   const [data, setData] = useState(null);
 
   const fetchData = async () => {
-    const { data } = await axios.get("https://reqres.in/api/users/2");
-    setData(data.data);
+    try {
+      const categories = await $axios.get("/categories");
+      setData(categories);
+    } catch (error) {
+      console.log(error);
+    }
   };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
 
   return (
     <Center>
-      <Text>Welcome {user.name}</Text>
-      <Text>{data && `Welcome ${data.first_name} ${data.last_name}`}</Text>
-      <Text>
-        Welcome {data?.first_name} {data?.last_name}
-      </Text>
+      <StatusBar barStyle="dark-content" />
+      {/* <Text>Welcome {user.name}</Text>
+      <Button title="Fetch categories" onPress={fetchData} />
+      <Text>No of categories {data?.length}</Text> */}
+      <ProductCard />
       <Button
         title="Go to Search Screen"
         onPress={() => navigation.navigate("Search")}

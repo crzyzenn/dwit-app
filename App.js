@@ -1,16 +1,29 @@
 import React from "react";
+import { ThemeProvider } from "react-native-elements";
 import { Provider } from "react-redux";
 import AppIndex from "./components/AppIndex";
 import store from "./redux/store";
 
 export default function App() {
-  // ... can i redux store values fetch here???
-  // 2 navigators...
-  // 1. Auth
-  // 2. User Flow...
+  const theme = {
+    colors: {
+      // primary: "",
+    },
+    Button: {
+      titleStyle: {
+        fontSize: 15,
+      },
+      containerStyle: {
+        // borderRadius: 20,
+      },
+    },
+  };
+
   return (
     <Provider store={store}>
-      <AppIndex />
+      <ThemeProvider theme={theme}>
+        <AppIndex />
+      </ThemeProvider>
     </Provider>
   );
 }
