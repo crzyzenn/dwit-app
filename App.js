@@ -17,6 +17,11 @@ export default function App() {
         // borderRadius: 20,
       },
     },
+    Header: {
+      containerStyle: {
+        backgroundColor: "white",
+      },
+    },
   };
 
   return (
