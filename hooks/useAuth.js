@@ -28,10 +28,13 @@ export default function useAuth() {
   const login = async (values) => {
     mounted.current && setLoading(true);
     try {
-      const { access, refresh } = await $axios.post("/ph-auth/login", values);
+      const { accessToken, refreshToken } = await $axios.post(
+        "/ph-auth/login",
+        values
+      );
 
-      await AsyncStorage.setItem("accessToken", access);
-      await AsyncStorage.setItem("refreshToken", refresh);
+      await AsyncStorage.setItem("accessToken", accessToken);
+      await AsyncStorage.setItem("refreshToken", refreshToken);
 
       // Fetch the user....
       const user = await $axios.get("/ph-auth/user");

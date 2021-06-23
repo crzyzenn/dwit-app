@@ -1,7 +1,6 @@
 import React from "react";
-import { Button, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { Header, Icon, useTheme } from "react-native-elements";
-import Center from "../components/Center";
 
 const ProductDetailsScreen = ({ navigation, route }) => {
   const { theme } = useTheme();
