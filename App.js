@@ -22,6 +22,12 @@ export default function App() {
         backgroundColor: "white",
       },
     },
+    Text: {
+      h4Style: {
+        fontSize: 18,
+        fontWeight: "bold",
+      },
+    },
   };
 
   return (

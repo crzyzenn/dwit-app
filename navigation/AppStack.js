@@ -27,7 +27,13 @@ const AppStack = () => {
     // </BrowserRouter>
 
     <Stack.Navigator>
-      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen
+        options={{
+          header: () => null,
+        }}
+        name="Home"
+        component={HomeScreen}
+      />
       <Stack.Screen
         options={{
           header: () => null,

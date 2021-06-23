@@ -7,6 +7,7 @@ import {
   View,
 } from "react-native";
 import useSWR from "swr";
+import AppHeader from "../components/AppHeader";
 import Center from "../components/Center";
 import ProductCard from "../components/ProductCard";
 import { $axios } from "../lib/axios";
@@ -16,8 +17,9 @@ const HomeScreen = ({ navigation }) => {
   const { data, isValidating, revalidate } = useSWR("/products", $axios);
 
   return (
-    <Center>
+    <View style={{ flex: 1 }}>
       <StatusBar barStyle="dark-content" />
+      <AppHeader name="Home" />
       {isValidating ? (
         <ActivityIndicator size="large" />
       ) : (
@@ -33,7 +35,10 @@ const HomeScreen = ({ navigation }) => {
                 <ProductCard
                   _id={item._id}
                   title={item.name}
-                  image={item.image}
+                  // image={item.image}
+                  image={`https://source.unsplash.com/random/500x50${Math.floor(
+                    Math.random() * 100
+                  )}`}
                   category={item.category?.name}
                   price={item.price}
                 />
@@ -43,7 +48,7 @@ const HomeScreen = ({ navigation }) => {
           />
         </View>
       )}
-    </Center>
+    </View>
   );
 };
 

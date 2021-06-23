@@ -1,57 +1,55 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { Header, Icon, useTheme } from "react-native-elements";
+import { StyleSheet, View } from "react-native";
+import { Image, Text } from "react-native-elements";
+import useSWR from "swr";
+import AppHeader from "../components/AppHeader";
+import Loading from "../components/Loading";
+import { $axios } from "../lib/axios";
 
 const ProductDetailsScreen = ({ navigation, route }) => {
-  const { theme } = useTheme();
   const productId = route.params._id;
-  console.log(productId);
-  // /products/${id}
+
+  const { data, isValidating } = useSWR(`/products/${productId}`, $axios);
+
   return (
     <>
-      <Header
-        placement="left"
-        leftComponent={
+      <AppHeader name="Product Details" backVisible />
+      {isValidating ? (
+        <Loading />
+      ) : (
+        <View style={{ flex: 1 }}>
+          <Image
+            style={{
+              width: "100%",
+              height: 350,
+            }}
+            source={{
+              uri: "https://source.unsplash.com/random/500x500",
+              // uri: data.image,
+            }}
+          />
+          {/* Details container */}
           <View
             style={{
-              flexDirection: "row",
-              justifyContent: "center",
-              alignItems: "center",
+              padding: 20,
             }}
           >
-            <Icon
-              name="chevron-left"
-              type="feather"
-              color={theme.colors.black}
-              size={20}
-              style={{
-                marginRight: 10,
-              }}
-              onPress={() => navigation.goBack()}
-            />
             <Text
+              h4
               style={{
-                fontSize: 20,
-                color: theme.colors.black,
-                fontWeight: "bold",
+                marginBottom: 10,
               }}
             >
-              Product Details
+              {data.name}
             </Text>
+            <Text>{data.description}</Text>
           </View>
-        }
-      />
-      {/* <Center style={styles.searchContainer}>
-        <Text>Product description....</Text>
-      </Center> */}
+        </View>
+      )}
     </>
   );
 };
 
-const styles = StyleSheet.create({
-  searchContainer: {
-    backgroundColor: "teal",
-  },
-});
+const styles = StyleSheet.create({});
 
 export default ProductDetailsScreen;
