@@ -1,13 +1,14 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import { Image, Text } from "react-native-elements";
+import { Button, Icon, Image, Text, useTheme } from "react-native-elements";
 import useSWR from "swr";
 import AppHeader from "../components/AppHeader";
 import Loading from "../components/Loading";
 import { $axios } from "../lib/axios";
 
-const ProductDetailsScreen = ({ navigation, route }) => {
+const ProductDetailsScreen = ({ route }) => {
   const productId = route.params._id;
+  const { theme } = useTheme();
 
   const { data, isValidating } = useSWR(`/products/${productId}`, $axios);
 
@@ -34,14 +35,36 @@ const ProductDetailsScreen = ({ navigation, route }) => {
               padding: 20,
             }}
           >
-            <Text
-              h4
+            <View
               style={{
-                marginBottom: 10,
+                flexDirection: "row",
+                justifyContent: "space-between",
               }}
             >
-              {data.name}
-            </Text>
+              <Text
+                h4
+                style={{
+                  marginBottom: 10,
+                }}
+              >
+                {data.name}
+              </Text>
+              <Button
+                title="Add to cart"
+                icon={
+                  <Icon
+                    name="shopping-cart"
+                    type="feather"
+                    color={theme.colors.white}
+                    size={15}
+                    containerStyle={{
+                      marginLeft: 7,
+                    }}
+                  />
+                }
+                iconRight
+              />
+            </View>
             <Text>{data.description}</Text>
           </View>
         </View>

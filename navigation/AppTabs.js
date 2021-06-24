@@ -1,21 +1,14 @@
-import React from "react";
-import { View, Text } from "react-native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Feather } from "@expo/vector-icons";
-import AppStack from "./AppStack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import React from "react";
+import { useTheme } from "react-native-elements";
 import SettingsScreen from "../screens/SettingsScreen";
+import AppStack from "./AppStack";
 
 const Tab = createBottomTabNavigator();
 
-function HomeScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Home!</Text>
-    </View>
-  );
-}
-
 const AppTabs = () => {
+  const { theme } = useTheme();
   return (
     <Tab.Navigator
       screenOptions={({ route }) => {
@@ -41,8 +34,8 @@ const AppTabs = () => {
         };
       }}
       tabBarOptions={{
-        activeTintColor: "teal",
-        inactiveTintColor: "#aaa",
+        activeTintColor: theme.colors.primary,
+        inactiveTintColor: theme.colors.grey1,
       }}
     >
       <Tab.Screen name="Home" component={AppStack} />

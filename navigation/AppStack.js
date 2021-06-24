@@ -1,8 +1,9 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
+import CartScreen from "../screens/CartScreen";
 import HomeScreen from "../screens/HomeScreen";
+import ProductCategoryScreen from "../screens/ProductCategoryScreen";
 import ProductDetailsScreen from "../screens/ProductDetailsScreen";
-import SettingsScreen from "../screens/SettingsScreen";
 
 const Stack = createStackNavigator();
 
@@ -26,7 +27,7 @@ const AppStack = () => {
     //   </Switch>
     // </BrowserRouter>
 
-    <Stack.Navigator>
+    <Stack.Navigator initialRouteName="Home">
       <Stack.Screen
         options={{
           header: () => null,
@@ -40,6 +41,20 @@ const AppStack = () => {
         }}
         name="ProductDetails"
         component={ProductDetailsScreen}
+      />
+      <Stack.Screen
+        options={{
+          header: () => null,
+        }}
+        name="CategoryProducts"
+        component={ProductCategoryScreen}
+      />
+      <Stack.Screen
+        options={{
+          header: () => null,
+        }}
+        name="Cart"
+        component={CartScreen}
       />
     </Stack.Navigator>
   );

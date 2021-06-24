@@ -1,57 +1,34 @@
 import React from "react";
-import {
-  ActivityIndicator,
-  FlatList,
-  ScrollView,
-  StatusBar,
-  View,
-} from "react-native";
-import { Chip } from "react-native-elements";
+import { ActivityIndicator, FlatList, StatusBar, View } from "react-native";
+import { Text } from "react-native-elements";
 import useSWR from "swr";
 import AppHeader from "../components/AppHeader";
 import ProductCard from "../components/ProductCard";
 import { $axios } from "../lib/axios";
 
-const HomeScreen = ({ navigation }) => {
+const ProductCategoryScreen = ({ route }) => {
   // Fetch products from api
-  const { data, isValidating, revalidate } = useSWR("/products", $axios);
-  const categories = useSWR("/categories", $axios);
+  const { data, isValidating, revalidate } = useSWR(
+    `/products/category/${route.params.category._id}`,
+    $axios
+  );
 
   return (
     <View style={{ flex: 1 }}>
       <StatusBar barStyle="dark-content" />
-      <AppHeader name="Home" />
+      <AppHeader name={route.params.category.name} backVisible />
       {isValidating ? (
         <ActivityIndicator size="large" />
       ) : (
         <View style={{ flex: 1, width: "100%", paddingHorizontal: 10 }}>
-          {/* Categories scroll view -> horizontal -> list of categories... */}
-          {/* ... */}
-          <ScrollView
-            horizontal
+          <Text
             style={{
-              paddingHorizontal: 10,
-              paddingVertical: 10,
+              marginVertical: 5,
+              marginLeft: 7,
             }}
-            showsHorizontalScrollIndicator={false}
           >
-            {!categories.isValidating &&
-              categories.data.map((category) => (
-                // Each Category
-                <Chip
-                  onPress={() =>
-                    navigation.navigate("CategoryProducts", {
-                      category,
-                    })
-                  }
-                  containerStyle={{
-                    marginRight: 5,
-                  }}
-                  key={category._id}
-                  title={category.name}
-                />
-              ))}
-          </ScrollView>
+            Found {data.length} products.
+          </Text>
           {/* Performance wise v.good - only renders what users see on the screen. */}
           <FlatList
             numColumns={2}
@@ -81,4 +58,4 @@ const HomeScreen = ({ navigation }) => {
   );
 };
 
-export default HomeScreen;
+export default ProductCategoryScreen;

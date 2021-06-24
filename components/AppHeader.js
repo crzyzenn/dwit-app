@@ -4,7 +4,7 @@ import { View } from "react-native";
 import { Header, Icon, Text, useTheme } from "react-native-elements";
 
 const AppHeader = ({ name, backVisible = false }) => {
-  const { goBack } = useNavigation();
+  const { goBack, navigate } = useNavigation();
   const { theme } = useTheme();
   return (
     <Header
@@ -42,6 +42,14 @@ const AppHeader = ({ name, backVisible = false }) => {
             {name}
           </Text>
         </View>
+      }
+      rightComponent={
+        <Icon
+          name="shopping-cart"
+          type="feather"
+          size={20}
+          onPress={() => navigate("Cart")}
+        />
       }
     />
   );
