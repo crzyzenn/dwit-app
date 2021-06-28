@@ -3,6 +3,7 @@ import { ThemeProvider } from "react-native-elements";
 import { Provider } from "react-redux";
 import AppIndex from "./components/AppIndex";
 import store from "./redux/store";
+import { StripeProvider } from "@stripe/stripe-react-native";
 
 export default function App() {
   const theme = {
@@ -33,7 +34,9 @@ export default function App() {
   return (
     <Provider store={store}>
       <ThemeProvider theme={theme}>
-        <AppIndex />
+        <StripeProvider publishableKey="pk_test_51J5PCLHSkxfngDrUqtTztzDp33xG21gGY1hczEiexc3JAztaWWrH2xSEDWJhkP90eQ4PTzYJ39FMC5odm5RXW2BO00csoSKUPM">
+          <AppIndex />
+        </StripeProvider>
       </ThemeProvider>
     </Provider>
   );

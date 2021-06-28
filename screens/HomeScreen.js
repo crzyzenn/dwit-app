@@ -9,6 +9,7 @@ import {
 import { Chip } from "react-native-elements";
 import useSWR from "swr";
 import AppHeader from "../components/AppHeader";
+import AppView from "../components/AppView";
 import ProductCard from "../components/ProductCard";
 import { $axios } from "../lib/axios";
 
@@ -24,7 +25,7 @@ const HomeScreen = ({ navigation }) => {
       {isValidating ? (
         <ActivityIndicator size="large" />
       ) : (
-        <View style={{ flex: 1, width: "100%", paddingHorizontal: 10 }}>
+        <AppView>
           {/* Categories scroll view -> horizontal -> list of categories... */}
           {/* ... */}
           <ScrollView
@@ -75,7 +76,7 @@ const HomeScreen = ({ navigation }) => {
             }}
             keyExtractor={(item) => item._id}
           />
-        </View>
+        </AppView>
       )}
     </View>
   );

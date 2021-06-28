@@ -5,45 +5,14 @@ import { StatusBar } from "react-native";
 import { StyleSheet, Text, View } from "react-native";
 import { Image, useTheme, Button, Icon } from "react-native-elements";
 import AppHeader from "../components/AppHeader";
+import Center from "../components/Center";
+import useCart from "../hooks/useCart";
 
-// Cart items format....
-const items = [
-  {
-    id: 1,
-    name: "product name",
-    image: "product image",
-    price: 99,
-    quantity: 5,
-  },
-  {
-    id: 2,
-    name: "product name",
-    image: "product image",
-    price: 99,
-    quantity: 5,
-  },
-  {
-    id: 3,
-    name: "product name",
-    image: "product image",
-    price: 99,
-    quantity: 5,
-  },
-  {
-    id: 4,
-    name: "product name",
-    image: "product image",
-    price: 99,
-    quantity: 5,
-  },
-  {
-    id: 5,
-    name: "product name",
-    image: "product image",
-    price: 99,
-    quantity: 5,
-  },
-];
+// Exercise....
+// On delete select...
+// Provide the user an alert
+// If ok, then delete...
+// If cancel, dont.!!
 
 const CartButton = ({ title, onPress, style }) => {
   const { theme } = useTheme();
@@ -67,6 +36,7 @@ const CartButton = ({ title, onPress, style }) => {
 
 const CartItem = ({ item }) => {
   const { theme } = useTheme();
+  const { removeFromCart, plusItem, minusItem } = useCart();
   return (
     <View
       style={{
@@ -109,24 +79,34 @@ const CartItem = ({ item }) => {
           alignItems: "center",
         }}
       >
-        <CartButton title="-" style={{ marginRight: 5 }} />
+        <CartButton
+          title="-"
+          onPress={() => minusItem(item._id)}
+          style={{ marginRight: 5 }}
+        />
         <Text>{item.quantity}</Text>
-        <CartButton title="+" style={{ marginLeft: 5 }} />
+        <CartButton
+          title="+"
+          onPress={() => plusItem(item._id)}
+          style={{ marginLeft: 5 }}
+        />
         <Icon
           type="feather"
           name="trash"
           size={15}
           style={{ marginLeft: 5 }}
           color={theme.colors.error}
+          onPress={() => removeFromCart(item._id)}
         />
       </View>
     </View>
   );
 };
 
-const CartScreen = () => {
+const CartScreen = ({ navigation: { navigate } }) => {
   const renderItem = ({ item }) => <CartItem item={item} />;
   const { theme } = useTheme();
+  const { items, totalPrice } = useCart();
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -139,29 +119,46 @@ const CartScreen = () => {
           backgroundColor: theme.colors.white,
         }}
       >
-        <FlatList
-          data={items}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.id}
-          showsVerticalScrollIndicator={false}
-        />
-        <View
-          style={{
-            backgroundColor: theme.colors.grey5,
-            padding: 20,
-            marginTop: 10,
-          }}
-        >
-          <Text
-            style={{
-              fontWeight: "bold",
-              fontSize: 15,
-              color: theme.colors.searchBg,
-            }}
-          >
-            Total: $500
-          </Text>
-        </View>
+        {items.length > 0 ? (
+          <>
+            <FlatList
+              data={items}
+              renderItem={renderItem}
+              keyExtractor={(item) => item._id}
+              showsVerticalScrollIndicator={false}
+            />
+            <View
+              style={{
+                backgroundColor: theme.colors.grey5,
+                padding: 15,
+                marginTop: 10,
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <Text
+                style={{
+                  fontWeight: "bold",
+                  fontSize: 15,
+                  color: theme.colors.searchBg,
+                }}
+              >
+                Total: ${totalPrice}
+              </Text>
+              <Button title="Checkout" onPress={() => navigate("Checkout")} />
+            </View>
+          </>
+        ) : (
+          <Center>
+            <Text>Your cart looks empty!</Text>
+            <Button
+              title="Shop now."
+              type="clear"
+              onPress={() => navigate("Home")}
+            />
+          </Center>
+        )}
       </View>
     </>
   );
