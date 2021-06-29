@@ -6,9 +6,7 @@ import { setDark } from "../redux/features/authSlice";
 // Custom hooks ability -> they can use react hooks inside of them...
 export default function useDarkMode() {
   const dark = useSelector((state) => state.auth.dark);
-  console.log(dark);
   const dispatch = useDispatch();
-
   const setDarkMode = (val) => dispatch(setDark(val));
 
   return { dark, setDarkMode };
