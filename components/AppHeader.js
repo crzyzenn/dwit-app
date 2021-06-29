@@ -2,12 +2,11 @@ import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { View } from "react-native";
 import { Header, Icon, Text, useTheme } from "react-native-elements";
-import useCart from "../hooks/useCart";
+import CartIcon from "./CartIcon";
 
-const AppHeader = ({ name, backVisible = false }) => {
-  const { goBack, navigate } = useNavigation();
+const AppHeader = ({ name, backVisible = false, iconsVisible = true }) => {
+  const { goBack } = useNavigation();
   const { theme } = useTheme();
-  const { items } = useCart();
   return (
     <Header
       containerStyle={{
@@ -46,40 +45,23 @@ const AppHeader = ({ name, backVisible = false }) => {
         </View>
       }
       rightComponent={
-        <View>
-          <Icon
-            name="shopping-cart"
-            type="feather"
-            size={22}
-            color={items.length > 0 ? theme.colors.primary : "black"}
-            onPress={() => navigate("Cart")}
-          />
+        iconsVisible && (
           <View
             style={{
-              backgroundColor: theme.colors.black,
+              flexDirection: "row",
               alignItems: "center",
-              justifyContent: "center",
-              borderRadius: 50,
-              width: 16,
-              height: 16,
-              position: "absolute",
-              right: -10,
-              top: -6,
-              borderWidth: 2,
-              borderColor: "white",
             }}
           >
-            <Text
-              style={{
-                fontSize: 10,
-                fontWeight: "bold",
-                color: theme.colors.white,
+            <Icon
+              name="search"
+              size={25}
+              containerStyle={{
+                marginRight: 5,
               }}
-            >
-              {items.length}
-            </Text>
+            />
+            <CartIcon />
           </View>
-        </View>
+        )
       }
     />
   );

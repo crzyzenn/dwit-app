@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   add,
   calculateTotal,
+  clear,
   decrementQuantity,
   incrementQuantity,
   removeItem,
@@ -17,6 +18,7 @@ export default function useCart() {
 
   const addToCart = (item) => dispatch(add(item));
   const removeFromCart = (id) => dispatch(removeItem(id));
+  const clearCart = () => dispatch(clear());
   const plusItem = (id) => dispatch(incrementQuantity(id));
   const minusItem = (id) => dispatch(decrementQuantity(id));
 
@@ -25,5 +27,13 @@ export default function useCart() {
     // Save the changed items to asyncStorage
   }, [items]);
 
-  return { addToCart, items, totalPrice, removeFromCart, plusItem, minusItem };
+  return {
+    addToCart,
+    items,
+    totalPrice,
+    removeFromCart,
+    plusItem,
+    minusItem,
+    clearCart,
+  };
 }

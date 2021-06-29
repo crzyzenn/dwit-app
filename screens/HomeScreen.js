@@ -6,7 +6,7 @@ import {
   StatusBar,
   View,
 } from "react-native";
-import { Chip } from "react-native-elements";
+import { Chip, useTheme } from "react-native-elements";
 import useSWR from "swr";
 import AppHeader from "../components/AppHeader";
 import AppView from "../components/AppView";
@@ -17,9 +17,10 @@ const HomeScreen = ({ navigation }) => {
   // Fetch products from api
   const { data, isValidating, revalidate } = useSWR("/products", $axios);
   const categories = useSWR("/categories", $axios);
+  const { theme } = useTheme();
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, backgroundColor: theme.colors.white }}>
       <StatusBar barStyle="dark-content" />
       <AppHeader name="Home" />
       {isValidating ? (

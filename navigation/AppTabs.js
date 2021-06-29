@@ -2,6 +2,7 @@ import { Feather } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import React from "react";
 import { useTheme } from "react-native-elements";
+import SearchScreen from "../screens/SearchScreen";
 import SettingsScreen from "../screens/SettingsScreen";
 import AppStack from "./AppStack";
 
@@ -20,6 +21,8 @@ const AppTabs = () => {
               iconName = "home";
             } else if (route.name === "Settings") {
               iconName = "settings";
+            } else if (route.name === "Search") {
+              iconName = "search";
             }
 
             return (
@@ -39,6 +42,7 @@ const AppTabs = () => {
       }}
     >
       <Tab.Screen name="Home" component={AppStack} />
+      <Tab.Screen name="Search" component={SearchScreen} />
       <Tab.Screen name="Settings" component={SettingsScreen} />
     </Tab.Navigator>
   );

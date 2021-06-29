@@ -68,6 +68,9 @@ const { actions, reducer } = createSlice({
         state.items[itemIndex] = itemToUpdate;
       }
     },
+    clear: (state) => {
+      state.items = [];
+    },
   },
 });
 
@@ -77,6 +80,7 @@ export const {
   removeItem,
   incrementQuantity,
   decrementQuantity,
+  clear,
 } = actions;
 
 export default reducer;

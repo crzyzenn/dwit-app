@@ -5,13 +5,36 @@ import AppHeader from "../components/AppHeader";
 import { $axios } from "../lib/axios";
 import { useStripe } from "@stripe/stripe-react-native";
 import useCart from "../hooks/useCart";
+import useAuth from "../hooks/useAuth";
 
-const PaymentScreen = ({ navigation: { navigate } }) => {
+const PaymentScreen = ({ navigation: { navigate }, route }) => {
+  const { items, totalPrice, clearCart } = useCart();
+  const { user } = useAuth();
+
   const { theme } = useTheme();
   const [loading, setLoading] = useState(false);
   const { initPaymentSheet, presentPaymentSheet } = useStripe();
 
-  const { totalPrice } = useCart();
+  const addOrder = async (paymentType) => {
+    setLoading(true);
+    const order = {
+      items,
+      totalPrice,
+      user,
+      paymentType,
+      checkoutInfo: route.params,
+    };
+    try {
+      await $axios.post("/orders", order);
+      // After order added, clear cart and navigate to success screen...
+      clearCart();
+      navigate("Success");
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const fetchPaymentIntent = async () => {
     // 999 -> cents 9.99$
@@ -52,10 +75,7 @@ const PaymentScreen = ({ navigation: { navigate } }) => {
       Alert.alert(error.message);
       setLoading(false);
     } else {
-      // store the order in the database....
-      // api...
-      // order store success -> clear cart....
-      navigate("Success");
+      await addOrder(1);
     }
   };
 
@@ -79,6 +99,8 @@ const PaymentScreen = ({ navigation: { navigate } }) => {
         />
         {/* Cash on delivery... */}
         <Button
+          loading={loading}
+          onPress={() => addOrder(2)}
           title="Cash on delivery"
           containerStyle={{
             marginVertical: 10,
