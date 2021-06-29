@@ -26,12 +26,14 @@ const HomeScreen = ({ navigation }) => {
             horizontal
             style={{
               paddingHorizontal: 10,
-              paddingVertical: 10,
+              paddingVertical: 14,
+              width: "100%",
+              height: 72,
             }}
             showsHorizontalScrollIndicator={false}
           >
             {!categories.isValidating &&
-              categories.data.map((category) => (
+              categories.data?.map((category) => (
                 // Each Category
                 <Chip
                   onPress={() =>
@@ -54,6 +56,9 @@ const HomeScreen = ({ navigation }) => {
             onRefresh={revalidate}
             refreshing={isValidating}
             showsVerticalScrollIndicator={false}
+            contentContainerStyle={{
+              paddingBottom: 20,
+            }}
             renderItem={({ item }) => {
               return (
                 <ProductCard

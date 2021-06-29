@@ -11,6 +11,7 @@ export default function useAuth() {
   const dispatch = useDispatch();
   const { loggedIn, user } = useSelector((state) => state.auth);
   const [loading, setLoading] = useState(false);
+  const [initialLoading, setInitialLoading] = useState(true);
 
   const mounted = useRef(false);
 
@@ -18,12 +19,33 @@ export default function useAuth() {
     // If component mounts....
     mounted.current = true;
 
+    persistLogin();
+
     // Cleanup function...
     return () => {
       // When component unmounts...
       mounted.current = false;
     };
   }, []);
+
+  const persistLogin = async () => {
+    try {
+      mounted.current && setInitialLoading(true);
+      // Fetch the user....
+      const user = await $axios.get("/ph-auth/user");
+
+      dispatch(
+        setAuth({
+          loggedIn: true,
+          user,
+        })
+      );
+    } catch (error) {
+      console.log(error);
+    } finally {
+      mounted.current && setInitialLoading(false);
+    }
+  };
 
   const login = async (values) => {
     mounted.current && setLoading(true);
@@ -78,5 +100,5 @@ export default function useAuth() {
     }
   };
 
-  return { login, loggedIn, user, logout, loading };
+  return { login, loggedIn, user, logout, loading, initialLoading };
 }

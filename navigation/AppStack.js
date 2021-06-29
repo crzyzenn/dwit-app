@@ -1,4 +1,7 @@
-import { createStackNavigator } from "@react-navigation/stack";
+import {
+  createStackNavigator,
+  TransitionPresets,
+} from "@react-navigation/stack";
 import React from "react";
 import CartScreen from "../screens/CartScreen";
 import CheckoutScreen from "../screens/CheckoutScreen";
@@ -30,56 +33,21 @@ const AppStack = () => {
     //   </Switch>
     // </BrowserRouter>
 
-    <Stack.Navigator initialRouteName="Home">
-      <Stack.Screen
-        options={{
-          header: () => null,
-        }}
-        name="Home"
-        component={HomeScreen}
-      />
-      <Stack.Screen
-        options={{
-          header: () => null,
-        }}
-        name="ProductDetails"
-        component={ProductDetailsScreen}
-      />
-      <Stack.Screen
-        options={{
-          header: () => null,
-        }}
-        name="CategoryProducts"
-        component={ProductCategoryScreen}
-      />
-      <Stack.Screen
-        options={{
-          header: () => null,
-        }}
-        name="Cart"
-        component={CartScreen}
-      />
-      <Stack.Screen
-        options={{
-          header: () => null,
-        }}
-        name="Checkout"
-        component={CheckoutScreen}
-      />
-      <Stack.Screen
-        options={{
-          header: () => null,
-        }}
-        name="Payments"
-        component={PaymentScreen}
-      />
-      <Stack.Screen
-        options={{
-          header: () => null,
-        }}
-        name="Success"
-        component={SuccessScreen}
-      />
+    <Stack.Navigator
+      initialRouteName="Home"
+      headerMode="screen"
+      screenOptions={{
+        ...TransitionPresets.SlideFromRightIOS, // Slide to right when navigating screens on both platforms...
+        header: () => null,
+      }}
+    >
+      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="ProductDetails" component={ProductDetailsScreen} />
+      <Stack.Screen name="CategoryProducts" component={ProductCategoryScreen} />
+      <Stack.Screen name="Cart" component={CartScreen} />
+      <Stack.Screen name="Checkout" component={CheckoutScreen} />
+      <Stack.Screen name="Payments" component={PaymentScreen} />
+      <Stack.Screen name="Success" component={SuccessScreen} />
     </Stack.Navigator>
   );
 };

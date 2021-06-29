@@ -67,7 +67,6 @@ const CheckoutScreen = ({ navigation: { navigate } }) => {
                   <Icon
                     type="ionicon"
                     name="chevron-forward-outline"
-                    color={theme.colors.white}
                     style={{
                       marginLeft: 5,
                     }}

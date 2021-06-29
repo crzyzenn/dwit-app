@@ -3,7 +3,13 @@ import { View } from "react-native";
 
 const AppView = ({ children }) => {
   return (
-    <View style={{ flex: 1, width: "100%", paddingHorizontal: 10 }}>
+    <View
+      style={{
+        flex: 1,
+        width: "100%",
+        paddingHorizontal: 10,
+      }}
+    >
       {children}
     </View>
   );

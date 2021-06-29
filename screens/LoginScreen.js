@@ -1,6 +1,6 @@
 import { Formik } from "formik";
 import React from "react";
-import { Button, colors, Input, Text, useTheme } from "react-native-elements";
+import { Button, Input, Text } from "react-native-elements";
 import * as yup from "yup";
 import Center from "../components/Center";
 import useAuth from "../hooks/useAuth";
@@ -10,9 +10,8 @@ const validationSchema = yup.object({
   password: yup.string().required(),
 });
 
-const LoginScreen = ({ navigation }) => {
+const LoginScreen = () => {
   const { login, loading } = useAuth();
-  const { theme } = useTheme();
 
   return (
     <Center
@@ -76,11 +75,11 @@ const LoginScreen = ({ navigation }) => {
           // </Form>
         )}
       </Formik>
-      <Button
+      {/* <Button
         type="clear"
         title="Not a user? Register."
         onPress={() => navigation.navigate("Register")}
-      />
+      /> */}
     </Center>
   );
 };

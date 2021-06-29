@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { ActivityIndicator, FlatList, View } from "react-native";
-import { Text, useTheme } from "react-native-elements";
-import { Input } from "react-native-elements/dist/input/Input";
+import { Text, useTheme, Input } from "react-native-elements";
 import AppHeader from "../components/AppHeader";
 import AppView from "../components/AppView";
 import Center from "../components/Center";
@@ -19,6 +18,7 @@ const SearchScreen = ({ navigation }) => {
   const searchProducts = async () => {
     try {
       setLoading(true);
+      setData([]);
       const data = await $axios.get(`/products/search/${search}`);
       setData(data);
     } catch (error) {
@@ -39,6 +39,7 @@ const SearchScreen = ({ navigation }) => {
           onChangeText={(val) => setSearch(val)}
           returnKeyType="search"
           onSubmitEditing={searchProducts}
+          // placeholderTextColor={theme.colors.searchBg}
         />
         {loading ? (
           <ActivityIndicator size="large" />

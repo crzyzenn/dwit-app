@@ -18,7 +18,7 @@ const ProductCard = ({ _id, category, title, price, image }) => {
       style={[
         styles.baseContainer,
         {
-          borderColor: theme.colors.grey4,
+          borderColor: theme.colors.searchBg,
           backgroundColor: theme.colors.white,
         },
       ]}
@@ -28,13 +28,19 @@ const ProductCard = ({ _id, category, title, price, image }) => {
           source={{
             uri: image,
           }}
-          style={{ width: "100%", height: 140, marginBottom: 10 }}
+          style={{
+            width: "100%",
+            height: 140,
+            resizeMode: "cover",
+          }}
         />
-        <Text style={styles.titleStyle}>{title}</Text>
-        <Text style={styles.categoryName}>{category}</Text>
-        <Text style={[styles.price, { color: theme.colors.primary }]}>
-          ${price}
-        </Text>
+        <View style={{ paddingHorizontal: 10, paddingBottom: 10 }}>
+          <Text style={styles.titleStyle}>{title}</Text>
+          <Text style={styles.categoryName}>{category}</Text>
+          <Text style={[styles.price, { color: theme.colors.black }]}>
+            ${price}
+          </Text>
+        </View>
       </View>
     </TouchableOpacity>
   );
@@ -47,9 +53,9 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "50%",
     margin: 5,
-    padding: 10,
     borderWidth: 1,
     borderRadius: 15,
+    overflow: "hidden",
   },
   titleStyle: { fontWeight: "bold", marginTop: 15, fontSize: 13 },
   price: { fontWeight: "bold", fontSize: 20 },

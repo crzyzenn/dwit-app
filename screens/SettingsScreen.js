@@ -1,26 +1,25 @@
 import React from "react";
+import { ActivityIndicator } from "react-native";
 import { Platform, SafeAreaView, StatusBar, StyleSheet } from "react-native";
-import { ListItem, useTheme } from "react-native-elements";
-import { Icon } from "react-native-elements/dist/icons/Icon";
-import { Switch } from "react-native-elements/dist/switch/switch";
+import { ListItem, useTheme, Icon, Switch } from "react-native-elements";
 import useAuth from "../hooks/useAuth";
 import useDarkMode from "../hooks/useDarkMode";
 
 const SettingsScreen = () => {
-  const { logout } = useAuth();
+  const { logout, loading, user } = useAuth();
   const { setDarkMode, dark } = useDarkMode();
   const { theme } = useTheme();
   const settingsItems = [
+    {
+      title: "Dark Mode",
+      type: "feather",
+      icon: "sun",
+    },
     {
       title: "Logout",
       icon: "logout",
       type: "simplelineicons",
       onPress: () => logout(),
-    },
-    {
-      title: "Dark Mode",
-      type: "feather",
-      icon: "sun",
     },
   ];
   return (
@@ -28,6 +27,13 @@ const SettingsScreen = () => {
     <SafeAreaView
       style={[styles.droidSafeArea, { backgroundColor: theme.colors.white }]}
     >
+      <ListItem bottomDivider>
+        <Icon name="user" type="feather" color={theme.colors.black} />
+        <ListItem.Content>
+          <ListItem.Title>{user.name}</ListItem.Title>
+          <ListItem.Subtitle>{user.email}</ListItem.Subtitle>
+        </ListItem.Content>
+      </ListItem>
       {settingsItems.map((item, i) => (
         <ListItem key={i} bottomDivider onPress={item.onPress}>
           <Icon
@@ -42,9 +48,10 @@ const SettingsScreen = () => {
             <Switch
               value={dark}
               onValueChange={(val) => setDarkMode(val)}
-              color="orange"
+              color={theme.colors.primary}
             />
           )}
+          {item.title === "Logout" && loading && <ActivityIndicator />}
         </ListItem>
       ))}
     </SafeAreaView>

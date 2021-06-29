@@ -1,8 +1,7 @@
 import React from "react";
 import { FlatList } from "react-native";
-import { TouchableOpacity } from "react-native";
-import { StyleSheet, Text, View } from "react-native";
-import { Image, useTheme, Button, Icon } from "react-native-elements";
+import { StyleSheet, View, TouchableOpacity } from "react-native";
+import { Image, useTheme, Button, Icon, Text } from "react-native-elements";
 import AppHeader from "../components/AppHeader";
 import Center from "../components/Center";
 import useCart from "../hooks/useCart";
@@ -63,7 +62,7 @@ const CartItem = ({ item }) => {
           <Text>{item.name}</Text>
           <Text
             style={{
-              color: theme.colors.primary,
+              color: theme.colors.black,
               fontWeight: "bold",
             }}
           >
@@ -139,7 +138,7 @@ const CartScreen = ({ navigation: { navigate } }) => {
                 style={{
                   fontWeight: "bold",
                   fontSize: 15,
-                  color: theme.colors.searchBg,
+                  color: theme.colors.black,
                 }}
               >
                 Total: ${totalPrice}

@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { StyleSheet } from "react-native";
-import { Text, useTheme } from "react-native-elements";
-import { Button } from "react-native-elements/dist/buttons/Button";
+import { Text, useTheme, Button } from "react-native-elements";
 import Center from "../components/Center";
 
 const SuccessScreen = ({ navigation: { navigate } }) => {
@@ -25,7 +24,7 @@ const SuccessScreen = ({ navigation: { navigate } }) => {
         containerStyle={{
           marginTop: 10,
         }}
-        type="clear"
+        type="solid"
         title="Return to home."
         onPress={() => navigate("Home")}
       />

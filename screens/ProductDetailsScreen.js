@@ -5,11 +5,13 @@ import useSWR from "swr";
 import AppHeader from "../components/AppHeader";
 import Loading from "../components/Loading";
 import useCart from "../hooks/useCart";
+import useDarkMode from "../hooks/useDarkMode";
 import { $axios } from "../lib/axios";
 
 const ProductDetailsScreen = ({ route }) => {
   const productId = route.params._id;
   const { data, isValidating } = useSWR(`/products/${productId}`, $axios);
+  const { dark } = useDarkMode();
 
   const { theme } = useTheme();
   const { addToCart } = useCart();
@@ -25,7 +27,7 @@ const ProductDetailsScreen = ({ route }) => {
       {isValidating ? (
         <Loading />
       ) : (
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, backgroundColor: theme.colors.white }}>
           <Image
             style={styles.image}
             source={{
@@ -39,6 +41,7 @@ const ProductDetailsScreen = ({ route }) => {
               style={{
                 flexDirection: "row",
                 justifyContent: "space-between",
+                alignItems: "center",
               }}
             >
               <Text h4 style={styles.title}>
@@ -47,11 +50,17 @@ const ProductDetailsScreen = ({ route }) => {
               <Button
                 title="Add to cart"
                 onPress={handleAdd}
+                type="solid"
+                raised
+                buttonStyle={{
+                  paddingHorizontal: 20,
+                  paddingVertical: 15,
+                }}
                 icon={
                   <Icon
                     name="shopping-cart"
                     type="feather"
-                    color={theme.colors.white}
+                    color="white"
                     size={15}
                     containerStyle={styles.iconContainer}
                   />

@@ -38,7 +38,10 @@ const AppTabs = () => {
       }}
       tabBarOptions={{
         activeTintColor: theme.colors.primary,
-        inactiveTintColor: theme.colors.grey1,
+        inactiveTintColor: theme.colors.grey2,
+        style: {
+          backgroundColor: theme.colors.white,
+        },
       }}
     >
       <Tab.Screen name="Home" component={AppStack} />
