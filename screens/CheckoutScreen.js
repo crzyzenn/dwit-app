@@ -1,10 +1,10 @@
 import { Formik } from "formik";
 import React from "react";
-import { StatusBar, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { Button, Icon, Input, Text, useTheme } from "react-native-elements";
+import * as yup from "yup";
 import AppHeader from "../components/AppHeader";
 import useCart from "../hooks/useCart";
-import * as yup from "yup";
 
 const validationSchema = yup.object({
   address: yup.string().required(),
@@ -16,7 +16,6 @@ const CheckoutScreen = ({ navigation: { navigate } }) => {
   const { totalPrice } = useCart();
   return (
     <>
-      <StatusBar barStyle="dark-content" />
       <AppHeader name="Checkout" backVisible />
       <View
         style={{

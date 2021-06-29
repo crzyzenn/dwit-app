@@ -1,12 +1,13 @@
 import React from "react";
-import { ActivityIndicator, FlatList, StatusBar, View } from "react-native";
-import { Text } from "react-native-elements";
+import { ActivityIndicator, FlatList, View } from "react-native";
+import { Text, useTheme } from "react-native-elements";
 import useSWR from "swr";
 import AppHeader from "../components/AppHeader";
 import ProductCard from "../components/ProductCard";
 import { $axios } from "../lib/axios";
 
 const ProductCategoryScreen = ({ route }) => {
+  const { theme } = useTheme();
   // Fetch products from api
   const { data, isValidating, revalidate } = useSWR(
     `/products/category/${route.params.category._id}`,
@@ -14,8 +15,7 @@ const ProductCategoryScreen = ({ route }) => {
   );
 
   return (
-    <View style={{ flex: 1 }}>
-      <StatusBar barStyle="dark-content" />
+    <View style={{ flex: 1, backgroundColor: theme.colors.white }}>
       <AppHeader name={route.params.category.name} backVisible />
       {isValidating ? (
         <ActivityIndicator size="large" />

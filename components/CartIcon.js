@@ -14,7 +14,7 @@ const CartIcon = () => {
         name="shopping-cart"
         type="feather"
         size={22}
-        color={items.length > 0 ? theme.colors.primary : "black"}
+        color={theme.colors.black}
         onPress={() => navigate("Cart")}
       />
       <View style={[styles.badge, { backgroundColor: theme.colors.black }]}>

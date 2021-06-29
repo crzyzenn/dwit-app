@@ -1,11 +1,11 @@
+import { useStripe } from "@stripe/stripe-react-native";
 import React, { useState } from "react";
-import { Alert, StatusBar, StyleSheet, View } from "react-native";
+import { Alert, StyleSheet, View } from "react-native";
 import { Button, useTheme } from "react-native-elements";
 import AppHeader from "../components/AppHeader";
-import { $axios } from "../lib/axios";
-import { useStripe } from "@stripe/stripe-react-native";
-import useCart from "../hooks/useCart";
 import useAuth from "../hooks/useAuth";
+import useCart from "../hooks/useCart";
+import { $axios } from "../lib/axios";
 
 const PaymentScreen = ({ navigation: { navigate }, route }) => {
   const { items, totalPrice, clearCart } = useCart();
@@ -81,7 +81,6 @@ const PaymentScreen = ({ navigation: { navigate }, route }) => {
 
   return (
     <>
-      <StatusBar barStyle="dark-content" />
       <AppHeader name="Payment" backVisible />
       <View
         style={{

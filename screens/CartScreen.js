@@ -1,7 +1,6 @@
 import React from "react";
 import { FlatList } from "react-native";
 import { TouchableOpacity } from "react-native";
-import { StatusBar } from "react-native";
 import { StyleSheet, Text, View } from "react-native";
 import { Image, useTheme, Button, Icon } from "react-native-elements";
 import AppHeader from "../components/AppHeader";
@@ -109,7 +108,6 @@ const CartScreen = ({ navigation: { navigate } }) => {
   const { items, totalPrice } = useCart();
   return (
     <>
-      <StatusBar barStyle="dark-content" />
       <AppHeader name="Cart" backVisible />
       <View
         style={{

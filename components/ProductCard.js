@@ -15,7 +15,13 @@ const ProductCard = ({ _id, category, title, price, image }) => {
           _id,
         })
       }
-      style={[styles.baseContainer, { borderColor: theme.colors.grey4 }]}
+      style={[
+        styles.baseContainer,
+        {
+          borderColor: theme.colors.grey4,
+          backgroundColor: theme.colors.white,
+        },
+      ]}
     >
       <View>
         <Image
@@ -44,7 +50,6 @@ const styles = StyleSheet.create({
     padding: 10,
     borderWidth: 1,
     borderRadius: 15,
-    backgroundColor: "white",
   },
   titleStyle: { fontWeight: "bold", marginTop: 15, fontSize: 13 },
   price: { fontWeight: "bold", fontSize: 20 },

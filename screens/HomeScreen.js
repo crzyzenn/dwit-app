@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  ActivityIndicator,
-  FlatList,
-  ScrollView,
-  StatusBar,
-  View,
-} from "react-native";
+import { ActivityIndicator, FlatList, ScrollView, View } from "react-native";
 import { Chip, useTheme } from "react-native-elements";
 import useSWR from "swr";
 import AppHeader from "../components/AppHeader";
@@ -21,7 +15,6 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <View style={{ flex: 1, backgroundColor: theme.colors.white }}>
-      <StatusBar barStyle="dark-content" />
       <AppHeader name="Home" />
       {isValidating ? (
         <ActivityIndicator size="large" />

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { ActivityIndicator, FlatList, StatusBar, View } from "react-native";
-import { useTheme } from "react-native-elements";
+import { ActivityIndicator, FlatList, View } from "react-native";
+import { Text, useTheme } from "react-native-elements";
 import { Input } from "react-native-elements/dist/input/Input";
 import AppHeader from "../components/AppHeader";
 import AppView from "../components/AppView";
+import Center from "../components/Center";
 import ProductCard from "../components/ProductCard";
 import { $axios } from "../lib/axios";
 
@@ -29,7 +30,6 @@ const SearchScreen = ({ navigation }) => {
 
   return (
     <View style={{ flex: 1, backgroundColor: theme.colors.white }}>
-      <StatusBar barStyle="dark-content" />
       <AppHeader name="Search" iconsVisible={false} />
       <AppView>
         <Input
@@ -42,32 +42,31 @@ const SearchScreen = ({ navigation }) => {
         />
         {loading ? (
           <ActivityIndicator size="large" />
+        ) : data.length > 0 ? (
+          <FlatList
+            numColumns={2}
+            data={data}
+            showsVerticalScrollIndicator={false}
+            renderItem={({ item }) => {
+              return (
+                <ProductCard
+                  _id={item._id}
+                  title={item.name}
+                  // image={item.image}
+                  image={`https://source.unsplash.com/random/500x50${Math.floor(
+                    Math.random() * 100
+                  )}`}
+                  category={item.category?.name}
+                  price={item.price}
+                />
+              );
+            }}
+            keyExtractor={(item) => item._id}
+          />
         ) : (
-          <>
-            {/* Categories scroll view -> horizontal -> list of categories... */}
-            {/* ... */}
-            {/* Performance wise v.good - only renders what users see on the screen. */}
-            <FlatList
-              numColumns={2}
-              data={data}
-              showsVerticalScrollIndicator={false}
-              renderItem={({ item }) => {
-                return (
-                  <ProductCard
-                    _id={item._id}
-                    title={item.name}
-                    // image={item.image}
-                    image={`https://source.unsplash.com/random/500x50${Math.floor(
-                      Math.random() * 100
-                    )}`}
-                    category={item.category?.name}
-                    price={item.price}
-                  />
-                );
-              }}
-              keyExtractor={(item) => item._id}
-            />
-          </>
+          <Center>
+            <Text>No products found. Please try another query.</Text>
+          </Center>
         )}
       </AppView>
     </View>

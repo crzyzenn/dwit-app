@@ -8,6 +8,7 @@ const { actions, reducer } = createSlice({
       name: "hello world",
       email: "test",
     },
+    dark: false,
   },
   reducers: {
     setAuth: (state, action) => {
@@ -15,9 +16,12 @@ const { actions, reducer } = createSlice({
       state.loggedIn = loggedIn;
       state.user = user;
     },
+    setDark: (state, action) => {
+      state.dark = action.payload;
+    },
   },
 });
 
-export const { setAuth } = actions;
+export const { setAuth, setDark } = actions;
 
 export default reducer;
