@@ -5,12 +5,13 @@ import { Header, Icon, Text, useTheme } from "react-native-elements";
 import CartIcon from "./CartIcon";
 
 const AppHeader = ({ name, backVisible = false, iconsVisible = true }) => {
-  const { goBack } = useNavigation();
+  const { goBack, navigate } = useNavigation();
   const { theme } = useTheme();
   return (
     <Header
       containerStyle={{
         paddingHorizontal: 20,
+        backgroundColor: theme.colors.white,
       }}
       placement="left"
       leftComponent={
@@ -54,6 +55,7 @@ const AppHeader = ({ name, backVisible = false, iconsVisible = true }) => {
           >
             <Icon
               name="search"
+              onPress={() => navigate("Search")}
               size={25}
               containerStyle={{
                 marginRight: 5,
